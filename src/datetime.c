@@ -119,32 +119,15 @@ char* get_weekday_str(WeekDay weekDay)
 
 char* get_datetime_str(DateTime dateTime)
 {
-    if (!date_is_valid(dateTime))
-    {
-        errno = EINVAL;
-        return NULL;
-    }
-
-    char* weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-    char* months[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
-
-    const int MAX_DATETIME_LENGTH = 50;
-    char* datetime_str = (char*)malloc(MAX_DATETIME_LENGTH * sizeof(char));
+    const char* months[] = {"JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"};
+    const char* weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     
-    if (datetime_str == NULL)
-    {
-        return NULL;
-    }
+    const int MAX_DATETIME_STR_LENGTH = 50;
+    char* datetime_str = malloc(MAX_DATETIME_STR_LENGTH);
 
-    sprintf(datetime_str, "%s, %02d %s %04d %02d:%02d:%02d.%03f",
-            weekdays[get_weekday(dateTime)],
-            dateTime.day,
-            months[dateTime.month - 1],
-            dateTime.year,
-            dateTime.hour,
-            dateTime.minute,
-            dateTime.second,
-            dateTime.millisecond);
-
+    snprintf(datetime_str, MAX_DATETIME_STR_LENGTH, "%s, %02d, %s, %04d %02d:%02d:%02d.%03.0f",
+             weekdays[get_weekday(dateTime)],
+             dateTime.day, months[dateTime.month - 1],
+             dateTime.year, dateTime.hour, dateTime.minute, dateTime.second, dateTime.millisecond);
     return datetime_str;
 }

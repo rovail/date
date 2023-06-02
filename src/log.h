@@ -8,7 +8,8 @@ typedef enum {
 } LogLevel;
 
 void log_message(LogLevel level, const char* format, ...);
-void log_init(const char* filename, LogLevel level);
+bool log_init(const char* filename, LogLevel level);
 void log_close();
+void get_current_datetime_str(char* datetime_str);
 
 #endif

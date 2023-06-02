@@ -1,14 +1,21 @@
 #include <stdio.h>
 #include <stdbool.h>
-#include <malloc.h>
 #include "convert.h"
 #include "input.h"
 #include "datetime.h"
 #include "log.h"
 
+#define LOG_FILE_PATH "log.txt"
+#define DEFAULT_LOG_LEVEL INFO
+
 int main()
 {
-    log_init("log.txt", INFO);
+    if (!log_init(LOG_FILE_PATH, DEFAULT_LOG_LEVEL))
+    {
+        printf("Error: Failed to initialize log file\n");
+        return 1;
+    }
+
     log_message(INFO, "Program started");
 
     while (true)
@@ -65,6 +72,7 @@ int main()
     }
 
     log_message(INFO, "Program ended");
+
     log_close();
 
     return 0;
