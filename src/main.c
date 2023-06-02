@@ -48,7 +48,6 @@ int main()
                 printf("Formatted Date: %s\n", datetime_str);
                 log_message(INFO, "Formatted Date: %s", datetime_str);
                 free(datetime_str);
-                datetime_str = NULL;
             }
             else
             {
