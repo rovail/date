@@ -1,5 +1,5 @@
-[INFO] Program started
-[INFO] Date validity: true
-[INFO: Friday, 02, Jun, 2023 14:04:45] Program started
-[DEBUG: Friday, 02, Jun, 2023 14:04:49] Date input: 1234-02-02 01:03:04.002, Valid: true
-[INFO: Friday, 02, Jun, 2023 14:04:49] Date validity: true
+[2023-06-03 12:28:28] Program started
+[2023-06-03 12:28:28] Requesting user input
+[2023-06-03 12:28:30] Received user input: 123-02-04 02:03:01.2.000000
+[2023-06-03 12:28:30] Date validity: true
+[2023-06-03 12:28:30] Date is valid: 123-2-4 02:03:01.2.000000

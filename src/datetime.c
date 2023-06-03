@@ -108,39 +108,23 @@ char* get_datetime_str(DateTime dateTime)
     char* weekdays[] = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
     char* months[] = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"};
 
-    size_t buffer_size = snprintf(NULL, 0, "%s, %02d, %s, %04d, %02d:%02d:%02d.%03f",
-                                  weekdays[get_weekday(dateTime)],
-                                  dateTime.day,
-                                  months[dateTime.month - 1],
-                                  dateTime.year,
-                                  dateTime.hour,
-                                  dateTime.minute,
-                                  dateTime.second,
-                                  dateTime.millisecond);
+    char datetime_str[150];
+    snprintf(datetime_str, sizeof(datetime_str), "%s, %02d, %s, %d, %02d:%02d:%02d.%03f",
+            weekdays[get_weekday(dateTime)],
+            dateTime.day,
+            months[dateTime.month - 1],
+            dateTime.year,
+            dateTime.hour,
+            dateTime.minute,
+            dateTime.second,
+            dateTime.millisecond);
 
-    if (buffer_size <= 0)
+    char* result = malloc(strlen(datetime_str) + 1);
+    if (result == NULL)
     {
-        errno = EINVAL;
         return NULL;
     }
 
-    size_t str_size = buffer_size + 1;
-    char* datetime_str = malloc(str_size);
-    if (datetime_str == NULL)
-    {
-        errno = ENOMEM;
-        return NULL;
-    }
-
-    snprintf(datetime_str, str_size, "%s, %02d, %s, %04d, %02d:%02d:%02d.%03f",
-             weekdays[get_weekday(dateTime)],
-             dateTime.day,
-             months[dateTime.month - 1],
-             dateTime.year,
-             dateTime.hour,
-             dateTime.minute,
-             dateTime.second,
-             dateTime.millisecond);
-
-    return datetime_str;
+    strcpy(result, datetime_str);
+    return result;
 }
