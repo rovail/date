@@ -31,5 +31,6 @@ WeekDay get_weekday(DateTime dateTime);
 char* get_month(DateTime dateTime);
 char* get_weekday_str(WeekDay weekDay);
 char* get_datetime_str(DateTime dateTime);
+DateTime ask_datetime();
 
 #endif
